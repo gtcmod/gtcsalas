@@ -1,3 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gartic Salas 2.0</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    h1 {
+  font-size: 36px;
+  color: green;
+  margin-top: 10px;
+}
+
+#jogadoresOnline {
+  font-size: 24px;
+  margin-top: 20px;
+  color: green;
+}
+
+#valorJogadoresOnline {
+  color: black;
+}
+
+.select-container {
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+  margin-top: 20px;
+}
+
+select {
+  font-size: 16px;
+  padding: 8px;
+  width: 45%;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+  border: 2px solid black;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid black;
+}
+
+th {
+  background-color: green;
+  color: white;
+  font-size: 22px;
+}
+
+.aviso {
+  font-family: 'Roboto', sans-serif;
+  margin-top: -10px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.aviso.verde {
+  color: green !important;
+}
+
+.aviso.vermelho {
+  color: red !important;
+}
+
+.aviso.roxo {
+  color: purple !important;
+}
+
+.link-sala-text {
+  font-family: 'Arial Black', Arial, sans-serif;
+  color: green;
+}
+
+.link-sala-url {
+  color: purple;
+}
+
+.link-sala-container {
+  margin-top: 10px;
+}
+
+/* Ajuste de largura para a coluna de posição, avatar, jogadores e pontos */
 th:first-child,
 td:first-child {
   width: 1px;
@@ -30,3 +128,669 @@ td:last-child {
 td:last-child span {
   white-space: nowrap;
 }
+  </style>
+</head>
+<body>
+  <h1>Gartic Salas 2.0</h1>
+  <div id="jogadoresOnline">Jogadores Online: <span id="valorJogadoresOnline">Aguardando dados...</span></div>
+
+  
+  <div class="select-container">
+    <select id="temaSelect">
+<option value="">Selecione um Tema</option>
+    <option value="GERAL">GERAL</option>
+<option value="OBJETOS">OBJETOS</option>
+<option value="ALIMENTOS">ALIMENTOS</option>
+<option value="ANIMAIS">ANIMAIS</option>
+<option value="VERBOS">VERBOS</option>
+<option value="PROFISSÕES">PROFISSÕES</option>
+<option value="D.A">D.A</option>
+<option value="FILMES">FILMES</option>
+<option value="MINECRAFT">MINECRAFT</option>
+<option value="GOT">GOT</option>
+<option value="BANDEIRAS">BANDEIRAS</option>
+<option value="MUSICA">MÚSICA</option>
+<option value="AVÇ">AVANÇADO</option>
+<option value="ESPANHOL">ESPANHOL</option>
+<option value="CARICATURAS">CARICATURAS</option>
+<option value="HP">HARRY POTTER</option>
+<option value="ITALIANO">ITALIANO</option>
+<option value="INGLES">INGLÊS</option>
+<option value="NOVELA">NOVELAS</option>
+<option value="POKEMON">POKEMON</option>
+<option value="ADJETIVOS">ADJETIVOS</option>
+<option value="MDC">MARVEL E DC</option>
+<option value="GAMES">GAMES</option>
+</select>
+
+    <select id="salasSelect">
+      <option value="">Selecione uma Sala</option>
+    </select>
+  </div>
+
+  <table id="pontuacao">
+    <thead>
+      <tr>
+        <th>Posição</th>
+        <th>Avatar</th>
+        <th>Jogadores</th>
+        <th>Pontos</th>
+      </tr>
+    </thead>
+    <tbody id="tabelaBody"></tbody>
+  </table>
+<div class="aviso" id="avisoSala"></div>
+
+
+  <script>
+      const nomesDasSalas = {
+        '03': 'GERAL 3',
+    '05': 'GERAL 5',
+    '08': 'GERAL 9',
+    '010': 'GERAL 11',
+    '012': 'GERAL 13',
+    '014': 'GERAL 15',
+    '015': 'GERAL 16',
+    '017': 'GERAL 18',
+    '044': 'GERAL 21',
+    '045': 'GERAL 22',
+    '046': 'GERAL 7',
+    '047': 'GERAL 17',
+    '022657': 'GERAL 23',
+    '027541': 'GERAL 24',
+        '038394720': 'GERAL 1',
+    '038394725': 'GERAL 2',
+    '038394729': 'GERAL 4',
+    '038394732': 'GERAL 6',
+    '038394736': 'GERAL 8',
+    '038394739': 'GERAL 10',
+    '038394741': 'GERAL 12',
+    '038394742': 'GERAL 14',
+    '038394745': 'GERAL 19',
+    '038394746': 'GERAL 20',
+    '027542': 'GERAL 25',
+    '030960': 'GERAL 26',
+    '037197': 'GERAL 27',
+    '059774': 'GERAL 28',
+    '060131': 'GERAL 29',
+    '0156331': 'GERAL 36',
+    '0156332': 'GERAL 37',
+    '01441917': 'GERAL 108',
+    '01482259': 'GERAL 117',
+    '01482262': 'GERAL 118',
+    '01495485': 'GERAL 123',
+    '01495493': 'GERAL 125',
+    '01495497': 'GERAL 126',
+    '01495505': 'GERAL 127',
+    '01495758': 'GERAL 129',
+    '01495822': 'GERAL 132',
+    '01495983': 'GERAL 133',
+    '01495996': 'GERAL 134',
+    '01496355': 'GERAL 143',
+    '01496372': 'GERAL 145',
+    '01496382': 'GERAL 147',
+    '019472071': 'GERAL 148',
+    '019472077': 'GERAL 149',
+    '019472087': 'GERAL 150',
+    '019472095': 'GERAL 151',
+    '019472099': 'GERAL 152',
+    '019472106': 'GERAL 153',
+    '019472132': 'GERAL 154',
+    
+    '023': 'OBJETOS 1',
+    '024': 'OBJETOS 2',
+    '026': 'OBJETOS 4',
+    '027': 'OBJETOS 5',
+    '028': 'OBJETOS 6',
+    '029': 'OBJETOS 7',
+    '030': 'OBJETOS 8',
+    '0156348': 'OBJETOS 19',
+    '0156349': 'OBJETOS 20',
+    '01323822': 'OBJETOS 33',
+    '01433234': 'OBJETOS 46',
+    '01441928': 'OBJETOS 49',
+    '01495442': 'OBJETOS 52',
+    '08275914': 'OBJETOS 60',
+    '08870952': 'OBJETOS 61',
+    '08870959': 'OBJETOS 62',
+    '08870981': 'OBJETOS 64',
+    '015392586': 'OBJETOS 65',
+    '015392590': 'OBJETOS 66',
+    '018828862': 'OBJETOS 67',
+    '018828871': 'OBJETOS 68',
+    '018828877': 'OBJETOS 69',
+    '018828880': 'OBJETOS 70',
+    
+    '032': 'ALIMENTOS 1',
+    '011436440': 'ALIMENTOS 2',
+    '029617': 'ALIMENTOS 4',
+    '011436456': 'ALIMENTOS 5',
+    '015392444': 'ALIMENTOS 34',
+    '01495597': 'ALIMENTOS 39',
+    '08871018': 'ALIMENTOS 45',
+    '08871024': 'ALIMENTOS 46',
+    '010583457': 'ALIMENTOS 47',
+    '010583459': 'ALIMENTOS 48',
+    '011436448': 'ALIMENTOS 3',
+    '011436462': 'ALIMENTOS 6',
+    '011436468': 'ALIMENTOS 7',
+    '011436470': 'ALIMENTOS 8',
+    '011436483': 'ALIMENTOS 9',
+    '011436488': 'ALIMENTOS 10',
+    '011436741': 'ALIMENTOS 43',
+    '011436744': 'ALIMENTOS 44',
+    '015352976': 'ALIMENTOS 49',
+    '015352985': 'ALIMENTOS 50',
+    '015392408': 'ALIMENTOS 61',
+    '015392415': 'ALIMENTOS 62',
+    '015392529': 'ALIMENTOS 63',
+    '015392541': 'ALIMENTOS 64',
+    '019472533': 'ALIMENTOS 85',
+    '019472540': 'ALIMENTOS 86',
+    '019472552': 'ALIMENTOS 87',
+    '019472562': 'ALIMENTOS 88',
+    '019474604': 'ALIMENTOS 101',
+    '019474618': 'ALIMENTOS 102',
+    '019474632': 'ALIMENTOS 103',
+    '019474640': 'ALIMENTOS 104',
+    
+    "033": "ANIMAIS 1",
+    "061314": "ANIMAIS 6",
+    "01383125": "ANIMAIS 33",
+    "01482285": "ANIMAIS 34",
+    "011436131": "ANIMAIS 2",
+    "011436139": "ANIMAIS 3",
+    "011436146": "ANIMAIS 4",
+    "011436155": "ANIMAIS 5",
+    "011436159": "ANIMAIS 7",
+    "011436158": "ANIMAIS 8",
+    "011436189": "ANIMAIS 12",
+    "011436193": "ANIMAIS 13",
+    "011436784": "ANIMAIS 43",
+    "08275850": "ANIMAIS 44",
+    "08871009": "ANIMAIS 45",
+    "011436796": "ANIMAIS 46",
+    "010583449": "ANIMAIS 47",
+    "010583451": "ANIMAIS 48",
+    "015352954": "ANIMAIS 49",
+    "015352967": "ANIMAIS 50",
+    
+    '023340': 'VERBOS 1',
+    '064453': 'VERBOS 2',
+    '011436709': 'VERBOS 5',
+    '064456': 'VERBOS 3',
+    '01442892': 'VERBOS 16',
+    '0180144': 'PROFISSÔES 1',
+    '011436612': 'PROFISSÔES 2',
+    '011436645': 'PROFISSÔES 4',
+    '011436654': 'PROFISSÔES 8',
+    '08141297': 'PROFISSÔES 9',
+    '010583436': 'PROFISSÔES 10',
+    '034': 'D.A 1',
+    '035': 'D.A 2',
+    '01316875': 'D.A 7',
+    '015146618': 'D.A 10',
+    '015269596': 'D.A 12',
+    '015269602': 'D.A 13',
+    '015352879': 'D.A 15',
+    '015352887': 'D.A 16',
+    '020': 'FILMES 1',
+    '021': 'FILMES 2',
+    '01316871': 'FILMES 7',
+    '01483601': 'FILMES 14',
+    '05312998': 'MINECRAFT 1',
+    '05313084': 'MINECRAFT 3',
+    '05247712': 'GOT 1',
+    '05247714': 'GOT 2',
+    '053': 'BANDEIRAS 1',
+    '032829': 'BANDEIRAS 2',
+    '042463': 'MÚSICA 1',
+    '036': 'AVÇ 1',
+    '037': 'AVÇ 2',
+    '038': 'AVÇ 3',
+    '0111150': 'ESPANHOL 1',
+    '031': 'CARICATURAS 1',
+    '0204642': 'HP 1',
+    '0368492': 'HP 2',
+    '01254112': 'ITALIANO 1',
+    '059': 'INGLÊS 1',
+    '0361146': 'NOVELA 1',
+    '0368493': 'NOVELA 2',
+    '051': 'POKEMON 1',
+    '04539464': 'POKEMON 2',
+    '024201': 'ADJETIVOS 1',
+    '03158864': 'MDC1',
+    '03158865': 'MDC2',
+    '03161447': 'MDC4',
+    '055': 'GAMES 1'
+      // Adicione outros mapeamentos de nomes de salas aqui...
+    };
+
+    const salas = {
+      'GERAL': ['03', '05', '08', '010', '012', '014', '015', '017', '044', '045', '046', '047', '022657', '027541', '038394720', '038394725', '038394729', '038394732', '038394736', '038394739', '038394741', '038394742', '038394745', '038394746', '027542', '030960', '037197', '059774', '060131', '0156331', '0156332', '01441917', '01482259', '01482262', '01495485', '01495493', '01495497', '01495505', '01495758', '01495822', '01495983', '01495996', '01496355', '01496372', '01496382', '019472071', '019472077', '019472087', '019472095', '019472099', '019472106', '019472132'],
+        'OBJETOS': ['023', '024', '026', '027', '028', '029', '030', '0156348', '0156349', '01323822', '01433234', '01441928', '01495442', '08275914', '08870952', '08870959', '08870981', '015392586', '015392590', '018828862', '018828871', '018828877', '018828880'],
+        'ALIMENTOS': ['032', '011436440', '029617', '011436456', '015392444', '01495597', '08871018', '08871024', '010583457', '010583459', '011436448', '011436462', '011436468', '011436470', '011436483', '011436488', '011436741', '011436744', '015352976', '015352985', '015392408', '015392415', '015392529', '015392541', '019472533', '019472540', '019472552', '019472562', '019474604', '019474618', '019474632', '019474640'],
+        'ANIMAIS': ['033', '061314', '01383125', '01482285', '011436131', '011436139', '011436146', '011436155', '011436159', '011436158', '011436189', '011436193', '011436784', '08275850', '08871009', '011436796', '010583449', '010583451', '015352954', '015352967'],
+        'VERBOS': ['023340', '064453', '011436709', '064456', '01442892'],
+        'PROFISSÕES': ['0180144', '011436612', '011436645', '011436654', '08141297', '010583436'],
+        'D.A': ['034', '035', '01316875', '015146618', '015269596', '015269602', '015352879', '015352887'],
+        'FILMES': ['020', '021', '01316871', '01483601'],
+        'MINECRAFT': ['05312998', '05313084'],
+        'GOT': ['05247712', '05247714'],
+        'BANDEIRAS': ['053', '032829'],
+        'MUSICA': ['042463'],
+        'AVÇ': ['036', '037', '038'],
+        'ESPANHOL': ['0111150'],
+        'CARICATURAS': ['031'],
+        'HP': ['0204642', '0368492'],
+        'ITALIANO': ['01254112'],
+        'INGLES': ['059'],
+        'NOVELA': ['0361146', '0368493'],
+        'POKEMON': ['051', '04539464'],
+        'ADJETIVOS': ['024201'],
+        'MDC': ['03158864', '03158865', '03161447'],
+        'GAMES': ['055'],
+      // Adicione outras listas de IDs de salas para diferentes temas aqui...
+    };
+
+const nomeDasSala = {
+    "038394720": "GERAL 1",
+    "038394725": "GERAL 2",
+    "03": "GERAL 3",
+    "038394729": "GERAL 4",
+    "05": "GERAL 5",
+    "038394732": "GERAL 6",
+    "046": "GERAL 7",
+    "038394736": "GERAL 8",
+    "08": "GERAL 9",
+    "038394739": "GERAL 10",
+    "010": "GERAL 11",
+    "038394741": "GERAL 12",
+    "012": "GERAL 13",
+    "038394742": "GERAL 14",
+    "014": "GERAL 15",
+    "015": "GERAL 16",
+    "047": "GERAL 17",
+    "017": "GERAL 18",
+    "038394745": "GERAL 19",
+    "038394746": "GERAL 20",
+    "044": "GERAL 21",
+    "045": "GERAL 22",
+    "022657": "GERAL 23",
+    "027541": "GERAL 24",
+    "027542": "GERAL 25",
+    "030960": "GERAL 26",
+    "037197": "GERAL 27",
+    "059774": "GERAL 28",
+    "060131": "GERAL 29",
+    "0156331": "GERAL 36",
+    "0156332": "GERAL 37",
+    "01441917": "GERAL 108",
+    "01482259": "GERAL 117",
+    "01482262": "GERAL 118",
+    "01495485": "GERAL 123",
+    "01495493": "GERAL 125",
+    "01495497": "GERAL 126",
+    "01495505": "GERAL 127",
+    "01495758": "GERAL 129",
+    "01495822": "GERAL 132",
+    "01495983": "GERAL 133",
+    "01495996": "GERAL 134",
+    "01496355": "GERAL 143",
+    "01496372": "GERAL 145",
+    "01496382": "GERAL 147",
+    "019472071": "GERAL 148",
+    "019472077": "GERAL 149",
+    "019472087": "GERAL 150",
+    "019472095": "GERAL 151",
+    "019472099": "GERAL 152",
+    "019472106": "GERAL 153",
+    "019472132": "GERAL 154",
+    "023": "OBJETOS 1",
+    "024": "OBJETOS 2",
+    "026": "OBJETOS 4",
+    "028": "OBJETOS 6",
+    "029": "OBJETOS 7",
+    "030": "OBJETOS 8",
+    "0156348": "OBJETOS 19",
+    "0156349": "OBJETOS 20",
+    "01323822": "OBJETOS 33",
+    "01433234": "OBJETOS 46",
+    "01441928": "OBJETOS 49",
+    "01495442": "OBJETOS 52",
+    "08275914": "OBJETOS 60",
+    "08870952": "OBJETOS 61",
+    "08870959": "OBJETOS 62",
+    "08870981": "OBJETOS 64",
+    "015392586": "OBJETOS 65",
+    "015392590": "OBJETOS 66",
+    "018828862": "OBJETOS 67",
+    "018828871": "OBJETOS 68",
+    "018828877": "OBJETOS 69",
+    "018828880": "OBJETOS 70",
+    "032": "ALIMENTOS 1",
+    "011436440": "ALIMENTOS 2",
+    "011436448": "ALIMENTOS 3",
+    "029617": "ALIMENTOS 4",
+    "011436456": "ALIMENTOS 5",
+    "011436462": "ALIMENTOS 6",
+    "011436468": "ALIMENTOS 7",
+    "011436470": "ALIMENTOS 8",
+    "011436483": "ALIMENTOS 9",
+    "011436488": "ALIMENTOS 10",
+"01482291": "ALIMENTOS 34",
+    "01495597": "ALIMENTOS 39",
+    "011436741": "ALIMENTOS 43",
+    "011436744": "ALIMENTOS 44",
+    "08871018": "ALIMENTOS 45",
+    "08871024": "ALIMENTOS 46",
+    "010583457": "ALIMENTOS 47",
+    "010583459": "ALIMENTOS 48",
+    "015352976": "ALIMENTOS 49",
+    "015352985": "ALIMENTOS 50",
+    "015392408": "ALIMENTOS 61",
+    "015392415": "ALIMENTOS 62",
+    "015392529": "ALIMENTOS 63",
+    "015392541": "ALIMENTOS 64",
+    "019472533": "ALIMENTOS 85",
+    "019472540": "ALIMENTOS 86",
+    "019472552": "ALIMENTOS 87",
+    "019472562": "ALIMENTOS 88",
+    "019474604": "ALIMENTOS 101",
+    "019474618": "ALIMENTOS 102",
+    "019474632": "ALIMENTOS 103",
+    "019474640": "ALIMENTOS 104",
+    // Salas de Animais
+    "033": "ANIMAIS 1",
+    "011436131": "ANIMAIS 2",
+    "011436139": "ANIMAIS 3",
+    "011436146": "ANIMAIS 4",
+    "011436155": "ANIMAIS 5",
+    "061314": "ANIMAIS 6",
+    "011436159": "ANIMAIS 7",
+    "011436158": "ANIMAIS 8",
+    "011436189": "ANIMAIS 12",
+    "011436193": "ANIMAIS 13",
+    "01383125": "ANIMAIS 33",
+    "01482285": "ANIMAIS 34",
+    "011436784": "ANIMAIS 43",
+    "08275850": "ANIMAIS 44",
+    "08871009": "ANIMAIS 45",
+    "011436796": "ANIMAIS 46",
+    "010583449": "ANIMAIS 47",
+    "010583451": "ANIMAIS 48",
+    "015352954": "ANIMAIS 49",
+    "015352967": "ANIMAIS 50",
+    "023340": "VERBOS 1",
+    "064453": "VERBOS 2",
+    "064456": "VERBOS 3",
+    "011436709": "VERBOS 5",
+    "01442892": "VERBOS 16",
+    // Salas de Profissões
+    "0180144": "PROFISSÔES 1",
+    "011436612": "PROFISSÔES 2",
+    "011436645": "PROFISSÔES 4",
+    "011436654": "PROFISSÔES 8",
+    "08141297": "PROFISSÔES 9",
+    "010583436": "PROFISSÔES 10",
+    // Salas de Desenhos Animados (D.A)
+    "034": "D.A 1",
+    "035": "D.A 2",
+    "01316875": "D.A 7",
+    "015146618": "D.A 10",
+    "015269596": "D.A 12",
+    "015269602": "D.A 13",
+    "015352879": "D.A 15",
+    "015352887": "D.A 16",
+    // Salas de Filmes
+    "020": "FILMES 1",
+    "021": "FILMES 2",
+    "01316871": "FILMES 7",
+    "01483601": "FILMES 14",
+    // Salas de Game of Thrones (GOT)
+    "05247712": "GOT 1",
+    "05247714": "GOT 2",
+    // Salas de Bandeiras
+    "053": "BANDEIRAS 1",
+    "032829": "BANDEIRAS 2",
+    // Sala de Música
+    "042463": "MUSICA 1",
+    // Salas Avançadas (AVÇ)
+    "036": "AVÇ 1",
+    "037": "AVÇ 2",
+    "038": "AVÇ 3",
+    // Salas de Espanhol
+    "0111150": "ESPANHOL 1",
+    // Salas de Caricaturas
+    "031": "CARICATURAS 1",
+    // Salas de Harry Potter (HP)
+    "0204642": "HP 1",
+    "0368492": "HP 2",
+    // Salas de Italiano
+    "01254112": "ITALIANO 1",
+    // Sala de Inglês
+    "059": "INGLES 1",
+    // Salas de Novelas
+    "0361146": "NOVELA 1",
+    "0368493": "NOVELA 2",
+    // Salas de Pokémon
+    "051": "POKEMON 1",
+    "04539464": "POKEMON 2",
+    // Salas de Adjetivos
+    "024201": "ADJETIVOS 1",
+    // Salas de Marvel e DC (MDC)
+    "03158864": "MDC1",
+    "03158865": "MDC2",
+    "03161447": "MDC4",
+    // Salas de Games
+    "055": "GAMES 1",
+        };
+
+  const temaSelect = document.getElementById('temaSelect');
+  const salasSelect = document.getElementById('salasSelect');
+
+  temaSelect.addEventListener('change', function() {
+    const temaSelecionado = this.value;
+    while (salasSelect.options.length > 1) {
+      salasSelect.remove(1);
+    }
+
+    salas[temaSelecionado].forEach(idSala => {
+      const nomeSala = nomesDasSalas[idSala] || `${temaSelecionado} ${idSala}`;
+      const option = document.createElement('option');
+      option.value = idSala;
+      option.textContent = nomeSala;
+      salasSelect.appendChild(option);
+    });
+  });
+
+  salasSelect.addEventListener('change', function() {
+    const salaSelecionada = this.value;
+    const linkSala = `gartic.com.br/${salaSelecionada}`;
+    const avisoSala = document.getElementById('avisoSala');
+    avisoSala.innerHTML = '';
+
+    if (salaSelecionada !== '') {
+      fetch(`https://gartic.com.br/info_sala.php?x=&id_sala=${salaSelecionada}`)
+        .then(response => response.json())
+        .then(data => {
+          const jogadores = data.jogadores || [];
+          const pontos = data.pontos || [];
+
+          const tabelaBody = document.getElementById('tabelaBody');
+          tabelaBody.innerHTML = '';
+
+          for (let i = 0; i < jogadores.length; i++) {
+            const tr = document.createElement('tr');
+
+            const posicao = document.createElement('td');
+            posicao.textContent = (i + 1).toString();
+            tr.appendChild(posicao);
+
+            const jogador = document.createElement('td');
+            jogador.textContent = jogadores[i];
+            tr.appendChild(jogador);
+
+            const ponto = document.createElement('td');
+            ponto.textContent = pontos[i];
+            tr.appendChild(ponto);
+
+            tabelaBody.appendChild(tr);
+          }
+
+
+          const linkElement = document.createElement('p');
+          const linkText = document.createElement('span');
+          linkText.textContent = 'Link da Sala: ';
+          linkText.classList.add('link-sala-text');
+          linkElement.appendChild(linkText);
+
+          const linkUrl = document.createElement('a');
+          linkUrl.textContent = `gartic.com.br/${salaSelecionada}`;
+          linkUrl.href = `https://${linkSala}`;
+          linkUrl.classList.add('link-sala-url');
+          linkElement.appendChild(linkUrl);
+
+          avisoSala.appendChild(linkElement);
+        })
+        .catch(error => {
+          console.error('Ocorreu um erro ao buscar os dados da sala:', error);
+        });
+    }
+  });
+
+  function atualizarJogadoresOnline() {
+    fetch('https://gartic.com.br/request/mobile/ping.php')
+      .then(response => response.json())
+      .then(data => {
+        const jogadoresOnline = data.jogando || 'Valor indisponível';
+        document.getElementById('valorJogadoresOnline').textContent = jogadoresOnline;
+      })
+      .catch(error => {
+        console.error('Ocorreu um erro:', error);
+        document.getElementById('valorJogadoresOnline').textContent = 'Erro ao buscar os jogadores online';
+      });
+  }
+
+  setInterval(atualizarJogadoresOnline, 500);
+
+  function atualizarFotosJogadores() {
+    const tabelaBody = document.getElementById('tabelaBody');
+    const linhas = tabelaBody.getElementsByTagName('tr');
+
+    for (let i = 0; i < linhas.length; i++) {
+      const jogador = linhas[i].getElementsByTagName('td')[1];
+      const nomeJogador = jogador.textContent.trim();
+
+      const avatarJogador = linhas[i].getElementsByTagName('td')[0];
+      const imgJogador = avatarJogador.querySelector('img');
+      imgJogador.src = `https://gartic.com.br/avatar.php?nick=${nomeJogador}`;
+    }
+  }
+
+ function atualizarSalaSelecionada() {
+  const salasSelect = document.getElementById('salasSelect');
+  const salaSelecionada = salasSelect.value;
+
+  if (salaSelecionada !== '') {
+    fetch(`https://gartic.com.br/info_sala.php?x=&id_sala=${salaSelecionada}`)
+      .then(response => response.json())
+      .then(data => {
+        const tabelaBody = document.getElementById('tabelaBody');
+        tabelaBody.innerHTML = '';
+
+        const jogadores = data.jogadores || [];
+        const pontos = data.pontos || [];
+
+       for (let i = 0; i < jogadores.length; i++) {
+    const tr = document.createElement('tr');
+
+          // Coluna de Posição
+          const posicaoColumn = document.createElement('td');
+          posicaoColumn.textContent = (i + 1).toString();
+          tr.appendChild(posicaoColumn);
+
+          // Coluna de Avatar
+          const avatarColumn = document.createElement('td');
+          const avatarImage = document.createElement('img');
+          avatarImage.src = `https://gartic.com.br/avatar.php?nick=${jogadores[i]}`;
+          avatarImage.alt = jogadores[i];
+          avatarImage.width = 47;
+          avatarImage.height = 47;
+          avatarImage.style.borderRadius = '50%'; // Deixa a imagem circular
+          avatarColumn.appendChild(avatarImage);
+          tr.appendChild(avatarColumn);
+
+ // Coluna de Nome do Jogador
+    const jogador = document.createElement('td');
+    const linkJogador = document.createElement('a');
+    linkJogador.href = `https://gartic.com.br/${jogadores[i]}`;
+    linkJogador.textContent = jogadores[i];
+    linkJogador.target = "_blank"; // Abre o link em uma nova aba
+    jogador.appendChild(linkJogador);
+    tr.appendChild(jogador);
+
+    // Coluna de Pontuação do Jogador
+    const ponto = document.createElement('td');
+    const pontoContainer = document.createElement('span');
+    pontoContainer.textContent = `${pontos[i]} Pontos`;
+    ponto.appendChild(pontoContainer);
+    tr.appendChild(ponto);
+
+    tabelaBody.appendChild(tr);
+        }
+
+const avisoSala = document.getElementById('avisoSala');
+  avisoSala.innerHTML = '';
+
+if (jogadores.length === 0) {
+  const aviso = document.createElement('p');
+  aviso.textContent = 'Não há jogadores nesta sala.';
+  avisoSala.appendChild(aviso);
+  avisoSala.className = 'aviso preto';
+} else if (jogadores.length >= 20) {
+  const aviso = document.createElement('p');
+  aviso.textContent = 'A sala está muito cheia.';
+  avisoSala.appendChild(aviso);
+  avisoSala.className = 'aviso roxo';
+} else if (jogadores.length >= 10) {
+  const aviso = document.createElement('p');
+  aviso.textContent = 'A sala está cheia.';
+  avisoSala.appendChild(aviso);
+  avisoSala.className = 'aviso vermelho';
+} else {
+  const vagasDisponiveis = 10 - jogadores.length;
+  const aviso = document.createElement('p');
+  aviso.textContent = `Há ${vagasDisponiveis === 1 ? '1 vaga disponível' : vagasDisponiveis + ' vagas disponíveis'}.`;
+  avisoSala.appendChild(aviso);
+  avisoSala.className = 'aviso verde';
+        }
+
+        const linkElement = document.createElement('p');
+        const linkText = document.createElement('span');
+        linkText.textContent = 'Link da Sala: ';
+        linkText.classList.add('link-sala-text');
+        linkElement.appendChild(linkText);
+
+        const linkUrl = document.createElement('a');
+        linkUrl.textContent = `gartic.com.br/${salaSelecionada}`;
+        linkUrl.href = `https://${salaSelecionada}`;
+        linkUrl.classList.add('link-sala-url');
+        linkElement.appendChild(linkUrl);
+
+        avisoSala.appendChild(linkElement);
+      })
+      .catch(error => {
+        console.error('Ocorreu um erro ao buscar os dados da sala:', error);
+      });
+  }
+}
+
+// Chamar a função inicialmente
+atualizarSalaSelecionada();
+
+// Definir o intervalo para chamar a função a cada 0.6 segundos (600 milissegundos)
+setInterval(atualizarSalaSelecionada, 600);
+</script>
+</body>
+</html>
