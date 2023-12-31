@@ -129,42 +129,50 @@ td:last-child span {
   white-space: nowrap;
 }
 
-        /* Responsividade para dispositivos móveis */
+/* Responsividade para dispositivos móveis */
     @media only screen and (max-width: 768px) {
       body {
-        padding: 10px; /* Adiciona um espaçamento interno à página */
+        padding: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh; /* Ocupa toda a altura da tela */
-        margin: 0; /* Remove margens para evitar espaços extras */
+        height: 100vh;
+        margin: 0;
+        overflow-x: hidden; /* Esconde a barra de rolagem horizontal */
       }
 
       .select-container {
-        width: 90%; /* Ajusta a largura do contêiner de seleção para preencher a largura da tela */
-        flex-direction: column; /* Altera para layout de coluna */
-        align-items: center; /* Alinha os itens ao centro */
+        width: 90%;
+        flex-direction: column;
+        align-items: center;
       }
 
       select {
-        width: 100%; /* Preenche a largura do contêiner pai */
-        margin-bottom: 10px; /* Adiciona espaçamento inferior entre seleções */
+        width: 100%;
+        margin-bottom: 10px;
       }
 
       table {
-        overflow-x: auto; /* Adiciona rolagem horizontal à tabela */
-        max-width: 100%; /* Garante que a tabela não ultrapasse a largura da tela */
+        overflow-x: auto;
+        max-width: 100%;
       }
 
       th, td {
-        font-size: 14px; /* Reduz o tamanho da fonte das células */
+        font-size: 14px;
       }
 
       th:nth-child(3),
       td:nth-child(3) {
-        max-width: unset; /* Remove a largura máxima da coluna de jogadores */
-        white-space: nowrap; /* Impede a quebra de texto na coluna de jogadores */
-        text-overflow: ellipsis; /* Adiciona reticências para indicar texto cortado */
+        max-width: unset;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    /* Ajuste de zoom para dispositivos com largura menor que 400px */
+    @media only screen and (max-width: 400px) {
+      body {
+        zoom: 0.8; /* Reduz o zoom para telas menores */
       }
     }
   </style>
