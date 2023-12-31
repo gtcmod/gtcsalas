@@ -1,0 +1,32 @@
+th:first-child,
+td:first-child {
+  width: 1px;
+  border-right: 1px solid black;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 1%;
+  white-space: nowrap;
+  border-right: 1px solid black;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  max-width: 60px; /* Reduz ainda mais a largura da coluna de jogadores */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adiciona reticências para indicar texto cortado */
+  border-right: 1px solid black;
+}
+
+th:last-child,
+td:last-child {
+  width: 120px; /* Aumenta um pouco mais a largura da coluna de pontos */
+  border-left: 1px solid black;
+  text-align: center;
+}
+
+/* Evita a quebra de linha dentro da coluna de pontos */
+td:last-child span {
+  white-space: nowrap;
+}
