@@ -128,6 +128,40 @@ td:last-child {
 td:last-child span {
   white-space: nowrap;
 }
+
+        /* Responsividade para dispositivos móveis */
+    @media only screen and (max-width: 768px) {
+      body {
+        padding: 10px; /* Adiciona um espaçamento interno à página */
+      }
+
+      .select-container {
+        width: 90%; /* Ajusta a largura do contêiner de seleção para preencher a largura da tela */
+        flex-direction: column; /* Altera para layout de coluna */
+        align-items: center; /* Alinha os itens ao centro */
+      }
+
+      select {
+        width: 100%; /* Preenche a largura do contêiner pai */
+        margin-bottom: 10px; /* Adiciona espaçamento inferior entre seleções */
+      }
+
+      table {
+        overflow-x: auto; /* Adiciona rolagem horizontal à tabela */
+        max-width: 100%; /* Garante que a tabela não ultrapasse a largura da tela */
+      }
+
+      th, td {
+        font-size: 14px; /* Reduz o tamanho da fonte das células */
+      }
+
+      th:nth-child(3),
+      td:nth-child(3) {
+        max-width: unset; /* Remove a largura máxima da coluna de jogadores */
+        white-space: nowrap; /* Impede a quebra de texto na coluna de jogadores */
+        text-overflow: ellipsis; /* Adiciona reticências para indicar texto cortado */
+      }
+    }
   </style>
 </head>
 <body>
