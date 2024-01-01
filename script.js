@@ -33,12 +33,16 @@ async function searchPlayer() {
 ];
 
     for (const sala of salasGartic) {
-        const response = await fetch(`https://gartic.com.br/info_sala.php?x=&id_sala=${sala}`);
-        const data = await response.json();
-        
-        if (data && data.jogadores && data.jogadores.includes(playerName)) {
-            document.getElementById('result').innerHTML = `O jogador ${playerName} foi encontrado na sala ${sala}.`;
-            return;
+        try {
+            const response = await fetch(`https://gartic.com.br/info_sala.php?x=&id_sala=${sala}`);
+            const data = await response.json();
+
+            if (data && data.jogadores && data.jogadores.includes(`"${playerName}"`)) {
+                document.getElementById('result').innerHTML = `O jogador ${playerName} foi encontrado na sala ${sala}.`;
+                return;
+            }
+        } catch (error) {
+            console.error(`Erro ao buscar na sala ${sala}: ${error}`);
         }
     }
 
