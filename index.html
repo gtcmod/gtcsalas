@@ -634,10 +634,16 @@ if (jogadores.length === 0) {
         linkElement.appendChild(linkText);
 
         const linkUrl = document.createElement('a');
-        linkUrl.textContent = `gartic.com.br/${salaSelecionada}`;
-        linkUrl.href = `https://gartic.com.br/${salaSelecionada}`;
-        linkUrl.classList.add('link-sala-url');
-        linkElement.appendChild(linkUrl);
+
+// Set the text content and href attribute
+linkUrl.textContent = `gartic.com.br/${salaSelecionada}`;
+linkUrl.href = `https://gartic.com.br/${salaSelecionada}`;
+
+// Add a class to the link for styling (optional)
+linkUrl.classList.add('link-sala-url');
+
+// Append the link to the container
+linkElement.appendChild(linkUrl);
 
         avisoSala.appendChild(linkElement);
       })
