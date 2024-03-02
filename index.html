@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gartic Salas 4.1</title>
+    <link rel="icon" href="https://gartic.com.br/imgs/mural/ii/iikyuung/estranho-mundo-de-jack.png" type="image/png">
+    <!-- Importar as fonte do Google Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap" rel="stylesheet">
+  <style>
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #1c1c1c;
+  color: #fff;
+  text-align: center;
+}
+header {
+  background-color: #333;
+  padding: 5px;
+  color: #ff9900;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ff9900;
+}
+h1 {
+  font-size: 30px;
+  margin: 0;
+}
+#onlinePlayers {
+  font-size: 20px;
+  margin-top: 10px;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+select, input {
+  margin: 10px;
+  padding: 12px;
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  border: 2px solid #ff9900;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #333;
+  flex: 1;
+  max-width: calc(50% - 20px); /* Limita a largura máxima a 50% do contêiner com alguma margem */
+}
+table {
+  width: 50%; /* Reduza a largura da tabela conforme necessário */
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: #1c1c1c;
+  color: #fff;
+  border: 2px solid #70480c;
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 2px solid #70480c;
+  border-right: 1px solid #70480c;
+  color: #fff;
+}
+th:last-child, td:last-child {
+  border-right: none;
+}
+th {
+  background-color: #ff9900;
+  color: #1c1c1c;
+}
+td {
+  background-color: #333;
+  color: #fff;
+}
+tr:hover {
+  background-color: #2c2c2c;
+}
+#roomStatus {
+  font-size: 20px;
+  margin-top: 20px;
+  color: #ff0000;
+}
+.full {
+  color: #ff0000 !important;
+}
+.veryFull {
+  color: #800080 !important;
+}
+.available {
+  color: #008000 !important;
+}
+.empty {
+  color: #fff !important;
+}
+#roomLink {
+  font-size: 20px;
+  margin-top: 20px;
+  color: #ff9900;
+  cursor: pointer;
+}
+img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+#muteButtonContainer {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 9999;
+    }
+    #muteButton {
+        background-color: #ff9900;
+        color: #1c1c1c;
+        font-size: 16px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    #muteButton:hover {
+        background-color: #1c1c1c;
+        color: #ff9900;
+    }
+/* Adiciona uma consulta de mídia para telas menores (por exemplo, dispositivos móveis) */
+@media only screen and (max-width: 600px) {
+  select, input {
+    width: calc(100% - 20px);
+    margin: 10px 0; /* Adiciona margem superior e inferior para espaçamento */
+    max-width: 100%; /* Define a largura máxima como 100% para ocupar a largura total */
+  }
+  table {
+    width: 100%; /* Reduza a largura da tabela conforme necessário */
+    margin: 0 auto; /* Define a largura da tabela como 100% em dispositivos móveis */
+  }
+}
+  </style>
+</head>
+<body>
+<div id="muteButtonContainer">
+        <button id="muteButton" onclick="toggleMute()">Mutar Som</button>
+    </div>
+    <header>
+    <h1>Gartic Salas 4.1</h1>
+<div id="onlinePlayers">Jogadores Online: <span id="onlineCount">0</span></div>
+  </header>
+    <a href="https://gtcmod.github.io/garticbusc/" style="color: orange; text-decoration: underline;">Clique aqui: Buscador de Jogadores Jogando em Salas Normais</a>
+    <div>
+        <a href="https://gtcmod.github.io/gtcsbusc/" style="color: orange; text-decoration: underline;">Clique aqui: Buscador de Jogadores Jogando em Salas Criadas BETA</a>
+  <div>
+    <select id="themeSelect">
+<option value="">Selecione um Tema</option>
+    <option value="GERAL">GERAL</option>
+<option value="OBJETOS">OBJETOS</option>
+<option value="ALIMENTOS">ALIMENTOS</option>
+<option value="ANIMAIS">ANIMAIS</option>
+<option value="VERBOS">VERBOS</option>
+<option value="PROFISSÕES">PROFISSÕES</option>
+<option value="D.A">D.A</option>
+<option value="FILMES">FILMES</option>
+<option value="NARUTO">NARUTO</option>
+<option value="MINECRAFT">MINECRAFT</option>
+<option value="LOL">LOL</option>
+<option value="GOT">GOT</option>
+<option value="BANDEIRAS">BANDEIRAS</option>
+<option value="MÚSICA">MÚSICA</option>
+<option value="AVÇ">AVANÇADO</option>
+<option value="ESPANHOL">ESPANHOL</option>
+<option value="CARICATURAS">CARICATURAS</option>
+<option value="HP">HARRY POTTER</option>
+<option value="ITALIANO">ITALIANO</option>
+<option value="INGLES">INGLÊS</option>
+<option value="NOVELA">NOVELAS</option>
+<option value="POKEMON">POKEMON</option>
+<option value="ADJETIVOS">ADJETIVOS</option>
+<option value="MDC">MARVEL E DC</option>
+<option value="GAMES">GAMES</option>
+</select>
+    <select id="roomSelect">
+    <option value="" disabled selected>Selecione uma Sala</option>
+    </select>
+<table id="scoreTable">
+  <thead>
+    <tr>
+      <th>Posição</th>
+      <th>Jogadores</th>
+      <th>Pontos</th>
+    </tr>
+      </thead>
+      <tbody>
+        <!-- Dados da tabela serão inseridos dinamicamente aqui -->
+      </tbody>
+    </table>
+    <div id="roomStatus"></div>
+  </div>
+<div id="roomLink"></div>
+  <script>
+    function _0x4eb5(){const _0x4d2430=['GERAL\x20125','POKEMON\x202','change','CARICATURAS\x201','roomLink','OBJETOS\x2019','roomSelect','OBJETOS\x2067','GERAL\x204','OBJETOS\x201','<a\x20href=\x22https://gartic.com.br/','10AuMJhf','\x20pontos','textContent','#fff','158263PsLkHE','GERAL\x20153','GERAL\x2010','FILMES\x207','white','ANIMAIS\x203','ANIMAIS\x2045','MINECRAFT\x201','ANIMAIS\x207','ALIMENTOS\x2043','vibrate','MÚSICA\x201','A\x20sala\x20está\x20muito\x20cheia','ANIMAIS\x201','GERAL\x20133','ANIMAIS\x2034','AVÇ\x201','PROFISSÔES\x209','addEventListener','appendChild','GERAL\x20154','PROFISSÔES\x202','OBJETOS\x208','ALIMENTOS\x2087','ALIMENTOS\x2010','ALIMENTOS\x204','ALIMENTOS\x20103','FILMES\x202','ALIMENTOS\x2046','OBJETOS\x2066','ANIMAIS\x2049','\x22\x20alt=\x22Avatar\x20do\x20jogador\x20','pontos','veryFull','ALIMENTOS\x2034','red','D.A\x2015','ALIMENTOS\x203','ANIMAIS\x2043','D.A\x202','jogando','GERAL\x20151','value','GERAL\x20118','GERAL\x20143','D.A\x2010','ff9900','getElementById','ALIMENTOS\x2039','NARUTO\x201','OBJETOS\x2062','style','GERAL\x2028','then','span','ANIMAIS\x2047','FILMES\x2014','HP\x202','ALIMENTOS\x209','ADJETIVOS\x201','ANIMAIS\x202','GERAL\x20145','ALIMENTOS\x2085','color','ANIMAIS\x2048','MDC4','OBJETOS\x202','MDC1','GERAL\x2021','option','insertRow','NOVELA\x202','ALIMENTOS\x205','OBJETOS\x207','1642BaYdnc','GERAL\x20126','ALIMENTOS\x208','ALIMENTOS\x2050','https://github.com/gtcmod/gtcsalas/raw/main/silent-beep-1859.mp3','MINECRAFT\x203','ALIMENTOS\x2061','GERAL\x207','D.A\x2016','D.A\x207','ESPANHOL\x201','A\x20sala\x20está\x20vazia','VERBOS\x2016','ALIMENTOS\x2062','href','classList','load','GERAL\x2026','ANIMAIS\x2046','GERAL\x2018','ANIMAIS\x205','OBJETOS\x204','680427sZNfSV','OBJETOS\x2061','POKEMON\x201','createElement','GERAL\x20123','jogadores','NOVELA\x201','error','Há\x20','ANIMAIS\x2050','16cXebto','GERAL\x205','&size=22&cut=50','AVÇ\x203','cursor','catch','length','ANIMAIS\x206','ALIMENTOS\x2044','OBJETOS\x205','GERAL\x2014','available','OBJETOS\x2033','muteButton','</a>','ALIMENTOS\x2049','full','GERAL\x20132','BANDEIRAS\x202','<img\x20src=\x22','PROFISSÔES\x208','OBJETOS\x2064','964908wKDERd','GERAL\x2019','GERAL\x2023','INGLÊS\x201','Erro\x20ao\x20obter\x20informações\x20da\x20sala:','D.A\x201','onlineCount','currentTime','VERBOS\x202','add','ALIMENTOS\x2063','play','GERAL\x2037','172695XIqPKc','PROFISSÔES\x201','A\x20sala\x20está\x20cheia','GAMES\x201','ANIMAIS\x2012','MDC2','Desmutar\x20Som','ANIMAIS\x208','GERAL\x2017','GERAL\x2024','OBJETOS\x2049','https://gartic.com.br/info_sala.php?x=&id_sala=','remove','GERAL\x2036','OBJETOS\x2069','ALIMENTOS\x202','insertCell','GERAL\x202','OBJETOS\x2060','ALIMENTOS\x2086','target','innerHTML','1\x20vaga\x20disponível','GERAL\x20129','GOT\x202','purple','querySelector','GERAL\x2013','OBJETOS\x2070','GERAL\x2011','284xgcTDR','GERAL\x20117','OBJETOS\x2046','VERBOS\x203','colSpan','GERAL\x20148','GERAL\x209','left','D.A\x2012','#scoreTable\x20tbody','GERAL\x206','textAlign','OBJETOS\x2052','_blank','OBJETOS\x2068','empty','620118keZbjt','json','themeSelect','GERAL\x20150','7528080Knwetf','ALIMENTOS\x207'];_0x4eb5=function(){return _0x4d2430;};return _0x4eb5();}const _0x27c353=_0x31f9;(function(_0x2f4418,_0x4ca567){const _0x559519=_0x31f9,_0x30427c=_0x2f4418();while(!![]){try{const _0xa6747c=-parseInt(_0x559519(0x120))/0x1*(parseInt(_0x559519(0x18f))/0x2)+parseInt(_0x559519(0x102))/0x3+-parseInt(_0x559519(0xf5))/0x4+parseInt(_0x559519(0x141))/0x5*(-parseInt(_0x559519(0x130))/0x6)+parseInt(_0x559519(0x145))/0x7*(-parseInt(_0x559519(0x1af))/0x8)+parseInt(_0x559519(0x1a5))/0x9+parseInt(_0x559519(0x134))/0xa;if(_0xa6747c===_0x4ca567)break;else _0x30427c['push'](_0x30427c['shift']());}catch(_0x53cbf8){_0x30427c['push'](_0x30427c['shift']());}}}(_0x4eb5,0x26fad));const onlineCountElement=document[_0x27c353(0x174)](_0x27c353(0xfb)),scoreTableBody=document[_0x27c353(0x11c)](_0x27c353(0x129)),roomStatusElement=document[_0x27c353(0x174)]('roomStatus'),roomLinkElement=document['getElementById'](_0x27c353(0x13a)),themeSelect=document[_0x27c353(0x174)](_0x27c353(0x132)),roomSelect=document[_0x27c353(0x174)](_0x27c353(0x13c)),salasPorTema={'GERAL':{'03':'GERAL\x203','05':_0x27c353(0x1b0),'08':_0x27c353(0x126),'010':_0x27c353(0x11f),'012':_0x27c353(0x11d),'014':'GERAL\x2015','015':'GERAL\x2016','017':_0x27c353(0x1a2),'044':_0x27c353(0x189),'045':'GERAL\x2022','046':_0x27c353(0x196),'047':_0x27c353(0x10a),'022657':_0x27c353(0xf7),'027541':_0x27c353(0x10b),'038394720':'GERAL\x201','038394725':_0x27c353(0x113),'038394729':_0x27c353(0x13e),'038394732':_0x27c353(0x12a),'038394736':'GERAL\x208','038394739':_0x27c353(0x147),'038394741':'GERAL\x2012','038394742':_0x27c353(0x1b9),'038394745':_0x27c353(0xf6),'038394746':'GERAL\x2020','027542':'GERAL\x2025','030960':_0x27c353(0x1a0),'037197':'GERAL\x2027','059774':_0x27c353(0x179),'060131':'GERAL\x2029','0156331':_0x27c353(0x10f),'0156332':_0x27c353(0x101),'01441917':'GERAL\x20108','01482259':_0x27c353(0x121),'01482262':_0x27c353(0x170),'01495485':_0x27c353(0x1a9),'01495493':_0x27c353(0x136),'01495497':_0x27c353(0x190),'01495505':'GERAL\x20127','01495758':_0x27c353(0x119),'01495822':_0x27c353(0xf0),'01495983':_0x27c353(0x153),'01495996':'GERAL\x20134','01496355':_0x27c353(0x171),'01496372':_0x27c353(0x182),'01496382':'GERAL\x20147','019472071':_0x27c353(0x125),'019472077':'GERAL\x20149','019472087':_0x27c353(0x133),'019472095':_0x27c353(0x16e),'019472099':'GERAL\x20152','019472106':_0x27c353(0x146),'019472132':_0x27c353(0x159)},'OBJETOS':{'023':_0x27c353(0x13f),'024':_0x27c353(0x187),'026':_0x27c353(0x1a4),'027':_0x27c353(0x1b8),'028':'OBJETOS\x206','029':_0x27c353(0x18e),'030':_0x27c353(0x15b),'0156348':_0x27c353(0x13b),'0156349':'OBJETOS\x2020','01323822':_0x27c353(0x1bb),'01433234':_0x27c353(0x122),'01441928':_0x27c353(0x10c),'01495442':_0x27c353(0x12c),'08275914':_0x27c353(0x114),'08870952':_0x27c353(0x1a6),'08870959':_0x27c353(0x177),'08870981':_0x27c353(0xf4),'015392586':'OBJETOS\x2065','015392590':_0x27c353(0x162),'018828862':_0x27c353(0x13d),'018828871':_0x27c353(0x12e),'018828877':_0x27c353(0x110),'018828880':_0x27c353(0x11e)},'ALIMENTOS':{'032':'ALIMENTOS\x201','011436440':_0x27c353(0x111),'029617':_0x27c353(0x15e),'011436456':_0x27c353(0x18d),'01482291':_0x27c353(0x167),'01495597':_0x27c353(0x175),'08871018':'ALIMENTOS\x2045','08871024':_0x27c353(0x161),'010583457':'ALIMENTOS\x2047','010583459':'ALIMENTOS\x2048','011436448':_0x27c353(0x16a),'011436462':'ALIMENTOS\x206','011436468':_0x27c353(0x135),'011436470':_0x27c353(0x191),'011436483':_0x27c353(0x17f),'011436488':_0x27c353(0x15d),'011436741':_0x27c353(0x14e),'011436744':_0x27c353(0x1b7),'015352976':_0x27c353(0xee),'015352985':_0x27c353(0x192),'015392408':_0x27c353(0x195),'015392415':_0x27c353(0x19c),'015392529':_0x27c353(0xff),'015392541':'ALIMENTOS\x2064','019472533':_0x27c353(0x183),'019472540':_0x27c353(0x115),'019472552':_0x27c353(0x15c),'019472562':'ALIMENTOS\x2088','019474604':'ALIMENTOS\x20101','019474618':'ALIMENTOS\x20102','019474632':_0x27c353(0x15f),'019474640':'ALIMENTOS\x20104'},'ANIMAIS':{'033':_0x27c353(0x152),'061314':_0x27c353(0x1b6),'01383125':'ANIMAIS\x2033','01482285':_0x27c353(0x154),'011436131':_0x27c353(0x181),'011436139':_0x27c353(0x14a),'011436146':'ANIMAIS\x204','011436155':_0x27c353(0x1a3),'011436159':_0x27c353(0x14d),'011436158':_0x27c353(0x109),'011436189':_0x27c353(0x106),'011436193':'ANIMAIS\x2013','011436784':_0x27c353(0x16b),'08275850':'ANIMAIS\x2044','08871009':_0x27c353(0x14b),'011436796':_0x27c353(0x1a1),'010583449':_0x27c353(0x17c),'010583451':_0x27c353(0x185),'015352954':_0x27c353(0x163),'015352967':_0x27c353(0x1ae)},'VERBOS':{'023340':'VERBOS\x201','064453':_0x27c353(0xfd),'011436709':'VERBOS\x205','064456':_0x27c353(0x123),'01442892':_0x27c353(0x19b)},'PROFISSÕES':{'0180144':_0x27c353(0x103),'011436612':_0x27c353(0x15a),'011436645':'PROFISSÔES\x204','011436654':_0x27c353(0xf3),'08141297':_0x27c353(0x156),'010583436':'PROFISSÔES\x2010'},'D.A':{'034':_0x27c353(0xfa),'035':_0x27c353(0x16c),'01316875':_0x27c353(0x198),'015146618':_0x27c353(0x172),'015269596':_0x27c353(0x128),'015269602':'D.A\x2013','015352879':_0x27c353(0x169),'015352887':_0x27c353(0x197)},'FILMES':{'020':'FILMES\x201','021':_0x27c353(0x160),'01316871':_0x27c353(0x148),'01483601':_0x27c353(0x17d)},'NARUTO':{'0204641':_0x27c353(0x176)},'MINECRAFT':{'05312998':_0x27c353(0x14c),'05313084':_0x27c353(0x194)},'LOL':{'05313011':'LOL\x201'},'GOT':{'05247712':'GOT\x201','05247714':_0x27c353(0x11a)},'BANDEIRAS':{'053':'BANDEIRAS\x201','032829':_0x27c353(0xf1)},'MÚSICA':{'042463':_0x27c353(0x150)},'AVÇ':{'036':_0x27c353(0x155),'037':'AVÇ\x202','038':_0x27c353(0x1b2)},'ESPANHOL':{'0111150':_0x27c353(0x199)},'CARICATURAS':{'031':_0x27c353(0x139)},'HP':{'0204642':'HP\x201','0368492':_0x27c353(0x17e)},'ITALIANO':{'01254112':'ITALIANO\x201'},'INGLÊS':{'059':_0x27c353(0xf8)},'NOVELA':{'0361146':_0x27c353(0x1ab),'0368493':_0x27c353(0x18c)},'POKEMON':{'051':_0x27c353(0x1a7),'04539464':_0x27c353(0x137)},'ADJETIVOS':{'024201':_0x27c353(0x180)},'MDC':{'03158864':_0x27c353(0x188),'03158865':_0x27c353(0x107),'03161447':_0x27c353(0x186)},'GAMES':{'055':_0x27c353(0x105)}};function fillRoomOptions(){const _0x3d2b56=_0x27c353,_0x46a47b=themeSelect[_0x3d2b56(0x16f)],_0x1df327=Object['entries'](salasPorTema[_0x46a47b]||{});roomSelect[_0x3d2b56(0x117)]='';const _0x4f7cb6=document['createElement'](_0x3d2b56(0x18a));_0x4f7cb6['value']='',_0x4f7cb6['textContent']='Selecione\x20uma\x20Sala',roomSelect[_0x3d2b56(0x158)](_0x4f7cb6),_0x1df327['forEach'](([_0x47e4e8,_0x172baa])=>{const _0x5ca2b0=_0x3d2b56,_0x85f93e=document[_0x5ca2b0(0x1a8)]('option');_0x85f93e[_0x5ca2b0(0x16f)]=_0x47e4e8,_0x85f93e['textContent']=_0x172baa,roomSelect['appendChild'](_0x85f93e);});}themeSelect[_0x27c353(0x157)]('change',fillRoomOptions),roomSelect[_0x27c353(0x157)](_0x27c353(0x138),function(){const _0x414b7c=_0x27c353,_0x2b5f8b=roomSelect[_0x414b7c(0x16f)];updateRoomLink(_0x2b5f8b);});function fetchOnlinePlayers(){const _0x3f47e0=_0x27c353;fetch('https://gartic.com.br/request/mobile/ping.php')[_0x3f47e0(0x17a)](_0x5081da=>_0x5081da[_0x3f47e0(0x131)]())[_0x3f47e0(0x17a)](_0x32789a=>{const _0xc79509=_0x3f47e0,_0x38621d=_0x32789a[_0xc79509(0x16d)]||0x0;onlineCountElement[_0xc79509(0x143)]=_0x38621d;if(_0x38621d<=0xdac)onlineCountElement[_0xc79509(0x178)][_0xc79509(0x184)]=_0xc79509(0x149);else _0x38621d<=0xfa0?onlineCountElement[_0xc79509(0x178)][_0xc79509(0x184)]=_0xc79509(0x168):onlineCountElement[_0xc79509(0x178)][_0xc79509(0x184)]=_0xc79509(0x11b);})[_0x3f47e0(0x1b4)](_0x355c49=>console['error']('Erro\x20ao\x20obter\x20jogadores\x20online:',_0x355c49));}function fetchRoomInfo(_0x924d48){const _0x5df226=_0x27c353;fetch(_0x5df226(0x10d)+_0x924d48)[_0x5df226(0x17a)](_0x15ac74=>_0x15ac74['json']())[_0x5df226(0x17a)](_0x4cd76d=>{const _0x999e9d=_0x5df226;updateScoreTable(_0x4cd76d['jogadores']||[],_0x4cd76d[_0x999e9d(0x165)]||[]),updateRoomStatus(_0x4cd76d[_0x999e9d(0x1aa)][_0x999e9d(0x1b5)]),updateRoomLink(_0x924d48);})['catch'](_0x41c457=>console[_0x5df226(0x1ac)](_0x5df226(0xf9),_0x41c457));}function updateScoreTable(_0x1579f1,_0x455e0e){const _0x337e2a=_0x27c353;scoreTableBody[_0x337e2a(0x117)]='';if(_0x1579f1['length']===0x0){const _0x7ed80f=scoreTableBody['insertRow'](0x0),_0x24fc16=_0x7ed80f[_0x337e2a(0x112)](0x0);_0x24fc16[_0x337e2a(0x124)]=0x3,_0x24fc16['classList'][_0x337e2a(0xfe)](_0x337e2a(0x12f));}else _0x1579f1['forEach']((_0x928122,_0xa5acf5)=>{const _0x2a0ce3=_0x337e2a,_0x374878=scoreTableBody[_0x2a0ce3(0x18b)](_0xa5acf5),_0x54a0a9=_0x374878[_0x2a0ce3(0x112)](0x0),_0x501c7a=_0x374878['insertCell'](0x1),_0x1b6234=_0x374878[_0x2a0ce3(0x112)](0x2);_0x54a0a9[_0x2a0ce3(0x178)][_0x2a0ce3(0x12b)]='left',_0x501c7a['style'][_0x2a0ce3(0x12b)]=_0x2a0ce3(0x127),_0x1b6234[_0x2a0ce3(0x178)][_0x2a0ce3(0x12b)]=_0x2a0ce3(0x127);const _0x419e21='https://gartic.com.br/avatar.php?nick='+_0x928122+_0x2a0ce3(0x1b1),_0x1994d0=_0x2a0ce3(0xf2)+_0x419e21+_0x2a0ce3(0x164)+_0x928122+'\x22>',_0xb36115=_0x2a0ce3(0x140)+_0x928122+'\x22\x20target=\x22_blank\x22>'+_0x928122+_0x2a0ce3(0x1bd);_0x54a0a9[_0x2a0ce3(0x117)]=_0xa5acf5+0x1,_0x501c7a[_0x2a0ce3(0x117)]=_0x1994d0+'\x20'+_0xb36115,_0x1b6234['textContent']=(_0x455e0e[_0xa5acf5]||0x0)+_0x2a0ce3(0x142);});}let isMuted=![];function toggleMute(){const _0x207c5d=_0x27c353;isMuted=!isMuted;const _0x45e31e=document[_0x207c5d(0x174)](_0x207c5d(0x1bc));isMuted?_0x45e31e['textContent']=_0x207c5d(0x108):_0x45e31e['textContent']='Mutar\x20Som';}function playNotificationSound(){const _0x581f36=_0x27c353;if(!isMuted){const _0x2fb56f=new Audio(_0x581f36(0x193));_0x2fb56f[_0x581f36(0xfc)]=0x0,_0x2fb56f[_0x581f36(0x100)]();}}function vibrateDevice(){const _0x6dd4c3=_0x27c353;_0x6dd4c3(0x14f)in navigator&&navigator[_0x6dd4c3(0x14f)]([0x0,0x0,0x0]);}function updateRoomStatus(_0x1965d3){const _0x48acb5=_0x27c353,_0x180fdb=0xa-_0x1965d3;if(_0x1965d3===0x0)roomStatusElement['textContent']=_0x48acb5(0x19a),roomStatusElement['classList']['remove'](_0x48acb5(0xef),'veryFull',_0x48acb5(0x1ba)),roomStatusElement[_0x48acb5(0x19e)][_0x48acb5(0xfe)](_0x48acb5(0x12f));else{if(_0x1965d3>0x0&&_0x1965d3<0xa){const _0x2f77eb=_0x180fdb===0x1?_0x48acb5(0x118):_0x180fdb+'\x20vagas\x20disponíveis';roomStatusElement[_0x48acb5(0x143)]=_0x48acb5(0x1ad)+_0x2f77eb,roomStatusElement[_0x48acb5(0x19e)][_0x48acb5(0x10e)](_0x48acb5(0x12f),_0x48acb5(0xef),_0x48acb5(0x166)),roomStatusElement[_0x48acb5(0x19e)][_0x48acb5(0xfe)](_0x48acb5(0x1ba)),playNotificationSound(),vibrateDevice(0x0);}else{if(_0x1965d3===0xa){roomStatusElement[_0x48acb5(0x143)]=_0x48acb5(0x104),roomStatusElement[_0x48acb5(0x19e)]['remove'](_0x48acb5(0x12f),_0x48acb5(0x166),_0x48acb5(0x1ba)),roomStatusElement[_0x48acb5(0x19e)]['add'](_0x48acb5(0xef));if('vibrate'in navigator)navigator[_0x48acb5(0x14f)](0x0);else _0x1965d3>0xa&&(roomStatusElement[_0x48acb5(0x143)]=_0x48acb5(0x151),roomStatusElement[_0x48acb5(0x19e)]['remove']('empty',_0x48acb5(0xef),'available'),roomStatusElement[_0x48acb5(0x19e)][_0x48acb5(0xfe)](_0x48acb5(0x166)),_0x48acb5(0x14f)in navigator&&navigator[_0x48acb5(0x14f)](0x0));}}}}function updateRoomLink(_0x34ae8a){const _0x57608e=_0x27c353,_0x5a7072=document[_0x57608e(0x174)]('roomLink');_0x5a7072['innerHTML']='';const _0x3a8440='gartic.com.br/'+_0x34ae8a,_0x1b08f8=document[_0x57608e(0x1a8)]('a');_0x1b08f8[_0x57608e(0x19d)]='https://gartic.com.br/'+_0x34ae8a,_0x1b08f8[_0x57608e(0x143)]=_0x3a8440,_0x1b08f8[_0x57608e(0x116)]=_0x57608e(0x12d),_0x1b08f8[_0x57608e(0x178)]['color']=_0x57608e(0x144);const _0x169ab2=document[_0x57608e(0x1a8)](_0x57608e(0x17b));_0x169ab2[_0x57608e(0x143)]='Link\x20de\x20Sala:\x20',_0x169ab2[_0x57608e(0x178)][_0x57608e(0x184)]=_0x57608e(0x173),_0x5a7072[_0x57608e(0x158)](_0x169ab2),_0x5a7072[_0x57608e(0x158)](_0x1b08f8),_0x5a7072[_0x57608e(0x178)][_0x57608e(0x1b3)]='pointer';}function updateOnlinePlayers(){fetchOnlinePlayers();}function updateData(){const _0x52d6d0=_0x27c353,_0x367522=roomSelect[_0x52d6d0(0x16f)];_0x367522&&fetchRoomInfo(_0x367522);}function _0x31f9(_0x2e4b1f,_0x3478b2){const _0x4eb568=_0x4eb5();return _0x31f9=function(_0x31f9d3,_0x177f47){_0x31f9d3=_0x31f9d3-0xee;let _0x41a86d=_0x4eb568[_0x31f9d3];return _0x41a86d;},_0x31f9(_0x2e4b1f,_0x3478b2);}window[_0x27c353(0x157)](_0x27c353(0x19f),fillRoomOptions),setInterval(updateOnlinePlayers,0x258),setInterval(updateData,0x258);
+  </script>
+    <p style="color: orange; font-family: 'Google Sans', sans-serif; text-align: center;">
+        Criado para jogadores mobile, desenvolvido por kel.
+    </p>
+</body>
+</html>
