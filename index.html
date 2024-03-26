@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gartic Salas 4.5</title>
+    <title>Gartic Salas 4.6</title>
     <link rel="icon" href="https://gartic.com.br/imgs/mural/ii/iikyuung/estranho-mundo-de-jack.png" type="image/png">
-    <!-- Importar as fonte do Google Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Sans+MS&display=swap');
+    </style>
   <style>
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Comic Sans MS', sans-serif;
   margin: 0;
   padding: 0;
   background-color: #1c1c1c;
@@ -40,16 +41,16 @@ select, input {
   margin: 10px;
   padding: 12px;
   font-size: 18px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Comic Sans MS', sans-serif;
   border: 2px solid #ff9900;
   border-radius: 5px;
   color: #fff;
   background-color: #333;
   flex: 1;
-  max-width: calc(50% - 20px); /* Limita a largura máxima a 50% do contêiner com alguma margem */
+  max-width: calc(50% - 20px);
 }
 table {
-  width: 50%; /* Reduza a largura da tabela conforme necessário */
+  width: 50%;
   margin: 0 auto;
   border-collapse: collapse;
   border-spacing: 0;
@@ -128,16 +129,15 @@ img {
         background-color: #1c1c1c;
         color: #ff9900;
     }
-/* Adiciona uma consulta de mídia para telas menores (por exemplo, dispositivos móveis) */
 @media only screen and (max-width: 600px) {
   select, input {
     width: calc(100% - 20px);
-    margin: 10px 0; /* Adiciona margem superior e inferior para espaçamento */
-    max-width: 100%; /* Define a largura máxima como 100% para ocupar a largura total */
+    margin: 10px 0;
+    max-width: 100%;
   }
   table {
-    width: 100%; /* Reduza a largura da tabela conforme necessário */
-    margin: 0 auto; /* Define a largura da tabela como 100% em dispositivos móveis */
+    width: 100%;
+    margin: 0 auto;
   }
 }
   </style>
@@ -147,7 +147,7 @@ img {
         <button id="muteButton" onclick="toggleMute()">Mutar Som</button>
     </div>
     <header>
-    <h1>Gartic Salas 4.5</h1>
+    <h1>Gartic Salas 4.6</h1>
 <div id="onlinePlayers">Jogadores Online: <span id="onlineCount">0</span></div>
   </header>
     <a href="https://gtcmod.github.io/garticbusc/" style="color: orange; text-decoration: underline;">Buscador de Jogadores Jogando em Salas Normais</a>
